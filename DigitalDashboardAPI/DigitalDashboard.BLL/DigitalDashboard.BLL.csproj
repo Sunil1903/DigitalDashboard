@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="Services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="BMSRegulationsByCountryService.cs" />
+    <Compile Remove="BMSRegulatorySKUService.cs" />
+    <Compile Remove="BooksService1.cs" />
+    <Compile Remove="DataImportService.cs" />
+    <Compile Remove="Interfaces\IBookRepository.cs" />
+    <Compile Remove="Interfaces\IDataExportRepository.cs" />
+    <Compile Remove="Interfaces\IDataImportRepository.cs" />
+    <Compile Remove="ReportsService.cs" />
+    <Compile Remove="Repository\DataExportRepository.cs" />
+    <Compile Remove="Repository\DataImportRepository.cs" />
+    <Compile Remove="Repository\DataValidation.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.17.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="System.Data.OleDb" Version="6.0.0" />
+    <PackageReference Include="System.DirectoryServices.AccountManagement" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DigitalDashboard.DAL\DigitalDashboard.DAL.csproj" />
+  </ItemGroup>
+
+</Project>

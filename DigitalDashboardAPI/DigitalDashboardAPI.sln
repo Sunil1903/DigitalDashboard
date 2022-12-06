@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalDashboard.API", "DigitalDashboard.API\DigitalDashboard.API.csproj", "{DAC466F7-1DA6-4EC8-A24D-F23242CD974E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalDashboard.BLL", "DigitalDashboard.BLL\DigitalDashboard.BLL.csproj", "{33675B41-F02E-41C5-ADD0-0BEA3103534C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalDashboard.DAL", "DigitalDashboard.DAL\DigitalDashboard.DAL.csproj", "{25207DAC-D300-4422-8DC5-8C69E1AA94C3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalDashboard.JobManager", "DigitalDashboard.JobManager\DigitalDashboard.JobManager.csproj", "{1F58D54D-7C23-4FCB-8854-724706EDA0C1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalDashboardAPI.Scheduler", "DigitalDashboardAPI.Scheduler\DigitalDashboardAPI.Scheduler.csproj", "{C04CD686-39DF-4D87-BC39-C2F29E2EA2B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalDashboard.Tests", "DigitalDashboard.Tests\DigitalDashboard.Tests.csproj", "{4940A12B-24F1-4169-A26A-25794E476770}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DAC466F7-1DA6-4EC8-A24D-F23242CD974E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAC466F7-1DA6-4EC8-A24D-F23242CD974E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAC466F7-1DA6-4EC8-A24D-F23242CD974E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAC466F7-1DA6-4EC8-A24D-F23242CD974E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33675B41-F02E-41C5-ADD0-0BEA3103534C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33675B41-F02E-41C5-ADD0-0BEA3103534C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33675B41-F02E-41C5-ADD0-0BEA3103534C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33675B41-F02E-41C5-ADD0-0BEA3103534C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25207DAC-D300-4422-8DC5-8C69E1AA94C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25207DAC-D300-4422-8DC5-8C69E1AA94C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25207DAC-D300-4422-8DC5-8C69E1AA94C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25207DAC-D300-4422-8DC5-8C69E1AA94C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F58D54D-7C23-4FCB-8854-724706EDA0C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F58D54D-7C23-4FCB-8854-724706EDA0C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F58D54D-7C23-4FCB-8854-724706EDA0C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F58D54D-7C23-4FCB-8854-724706EDA0C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C04CD686-39DF-4D87-BC39-C2F29E2EA2B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C04CD686-39DF-4D87-BC39-C2F29E2EA2B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C04CD686-39DF-4D87-BC39-C2F29E2EA2B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C04CD686-39DF-4D87-BC39-C2F29E2EA2B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4940A12B-24F1-4169-A26A-25794E476770}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4940A12B-24F1-4169-A26A-25794E476770}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4940A12B-24F1-4169-A26A-25794E476770}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4940A12B-24F1-4169-A26A-25794E476770}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F25A7799-2EB8-43A1-839D-C77E775948B2}
+	EndGlobalSection
+EndGlobal
