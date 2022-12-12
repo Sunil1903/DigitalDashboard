@@ -40,6 +40,7 @@ namespace DigitalDashboard.API.Controllers
             return result == null ? NoContent() : Ok(result);
         }
 
+        #region New Service Added On: 01 Dec 2022
         // New Version
         [HttpPost, Route("digitaldashboard/RegulationByCountry/GetRegulationsByCountry/New/{dataRange:int}/{skipRecordCount:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BMSRegulatoryCountryWithTotalCount))]
@@ -61,7 +62,7 @@ namespace DigitalDashboard.API.Controllers
 
             return result == null ? NoContent() : Ok(result);
         }
-
+        #endregion
 
         // Summary:
         //    POST: This API is used to get 'regulation by country' data

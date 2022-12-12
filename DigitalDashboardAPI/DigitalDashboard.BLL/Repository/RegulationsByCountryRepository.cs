@@ -129,7 +129,7 @@ namespace DigitalDashboard.BLL.Repository
             return returnCollection;
         }
 
-        // New Version
+        #region New Service Added On: 01 Dec 2022
         public async Task<RegulationByCountryDataWithFilters> GetRegulationsByCountryWithFiltersAsync(BMSRegulatoryCountryInput countryInput,
                                                                                                 int dataRange,
                                                                                                 int skipRecordCount)
@@ -184,5 +184,6 @@ namespace DigitalDashboard.BLL.Repository
             }
             return retrunCountryDataWithFilters;
         }
+        #endregion
     }
 }

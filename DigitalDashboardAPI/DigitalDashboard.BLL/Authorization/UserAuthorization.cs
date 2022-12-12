@@ -12,7 +12,7 @@ namespace DigitalDashboard.BLL.Authorization
         // Check user access rights
         public bool VerifyAccessRights()
         {
-            bool authorized = false;
+            bool authorized = true;
             try
             {
                 PrincipalContext pc = new PrincipalContext(ContextType.Domain, "lnties.com");

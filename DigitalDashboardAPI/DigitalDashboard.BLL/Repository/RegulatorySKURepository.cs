@@ -1,5 +1,6 @@
 ﻿using DigitalDashboard.BLL.Authorization;
 using DigitalDashboard.BLL.Interfaces;
+using DigitalDashboard.DAL.DTO;
 using DigitalDashboard.DAL.Models;
 using DnsClient.Protocol;
 using Microsoft.AspNetCore.Http;
@@ -68,6 +69,59 @@ namespace DigitalDashboard.BLL.Repository
             return returnCollection;
         }
 
+        #region New Service Added On: 12 Dec 2022
+        public async Task<RegulatorySKUFiltersDto> GetFilteredRegulatorySKUNewAsync()
+        {
+            bool isAuthorized = authorization.VerifyAccessRights();
+
+            RegulatorySKUFiltersDto returnCollection = new RegulatorySKUFiltersDto();
+
+            // Added on 12 Dec 2022
+            var regionWithSoldToCountryList = new List<RegionWithSoldToCountry>();
+
+            var result = await sKUCollection
+                               .Find(bms => bms.Active == "true")
+                               .ToListAsync();
+            
+            if (result.Count > 0)
+            {              
+                returnCollection.SKUList = result.Select(ex => ex.SKU).Distinct().ToList(); // Added on 12 Dec 2022
+                returnCollection.OfferingManager = result.Select(ex => ex.OfferingManager).Distinct().ToList();
+                returnCollection.Region = result.Select(ex => ex.Region).Distinct().ToList();
+                returnCollection.SoldToCountry = result.Select(ex => ex.SoldToCountry).Distinct().ToList();
+                returnCollection.FiscalYear = result.Select(ex => ex.FiscalYear).Distinct().ToList();
+                returnCollection.Quantity = result.Select(ex => Convert.ToDecimal(ex.Quantity)).Distinct().ToList();
+                returnCollection.Revenue = result.Select(ex => Convert.ToDecimal(ex.Revenue)).Distinct().ToList();
+
+                if (isAuthorized)
+                {
+                    returnCollection.Quantity = result.Select(ex => Convert.ToDecimal(ex.Quantity)).Distinct().ToList();
+                    returnCollection.Revenue = result.Select(ex => Convert.ToDecimal(ex.Revenue)).Distinct().ToList();
+                }
+                else
+                {
+                    returnCollection.Quantity = null;
+                    returnCollection.Revenue = null;
+                }
+
+                // Added on 12 Dec 2022
+                foreach (var item in result)
+                {
+                    RegionWithSoldToCountry regionWithSoldToCountry = new()
+                    {
+                        Region = item.Region,
+                        SoldToCountry = item.SoldToCountry
+                    };
+                    regionWithSoldToCountryList.Add(regionWithSoldToCountry);
+                }
+
+                // Added on 12 Dec 2022
+                returnCollection.RegionWithSoldToCountry = regionWithSoldToCountryList;
+            }
+            return returnCollection;
+        }
+        #endregion
+
         /// <summary>
         /// 
         /// </summary>
@@ -75,8 +129,8 @@ namespace DigitalDashboard.BLL.Repository
         /// <param name="dataRange"></param>
         /// <param name="skipRecordCount"></param>
         /// <returns></returns>
-        public async Task<RegulatorySKUDataWithFilterList> GetRegulatorySKUWithFilterListAsync(BMSRegulatorySKUInput sKUInput, 
-                                                                                                   int dataRange, 
+        public async Task<RegulatorySKUDataWithFilterList> GetRegulatorySKUWithFilterListAsync(BMSRegulatorySKUInput sKUInput,
+                                                                                                   int dataRange,
                                                                                                    int skipRecordCount)
         {
             bool isAuthorized = authorization.VerifyAccessRights();
@@ -88,7 +142,7 @@ namespace DigitalDashboard.BLL.Repository
                 BMSRegulatorySKUWithTotalCount bmsregulatoryskuwithtotalcount = new BMSRegulatorySKUWithTotalCount();
 
                 #region FilteringInputParameters
-                
+
                 string?[] regionList = { null };
                 string?[] SKUList = { null };
                 string?[] ProductDescriptionList = { null };
@@ -192,7 +246,7 @@ namespace DigitalDashboard.BLL.Repository
             }
             return returnCollection;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -209,7 +263,7 @@ namespace DigitalDashboard.BLL.Repository
             try
             {
                 #region Input_Parameters
-                
+
                 string?[] regionList = { null };
                 string?[] SKUList = { null };
                 string?[] ProductDescriptionList = { null };
@@ -268,7 +322,7 @@ namespace DigitalDashboard.BLL.Repository
                 #endregion
 
                 #region Setup_ReturnCollection
-                
+
                 returnCollection.TotalCount = records.Count();
                 returnCollection.bmsRegulatorySKUList = records.Skip(skipRecordCount).Take(dataRange).ToList();
                 if (isAuthorized)
@@ -291,7 +345,7 @@ namespace DigitalDashboard.BLL.Repository
             }
             return returnCollection;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -333,8 +387,8 @@ namespace DigitalDashboard.BLL.Repository
                                             .ToList();
             }
             return columnSKUList;
-        }        
-        
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -354,9 +408,9 @@ namespace DigitalDashboard.BLL.Repository
 
                 totalCount = list.Count();
 
-                var records = list.Where(y => ((sKUInput.TotalRevenueMaxValue == 0) || ((decimal?)y.Revenue >= sKUInput.TotalRevenueMinValue 
-                                  && (decimal)y.Revenue <= sKUInput.TotalRevenueMaxValue)) 
-                                  && ((sKUInput.SalesQuantityMaxValue == 0) || ((decimal?)y.Quantity >= sKUInput.SalesQuantityMinValue 
+                var records = list.Where(y => ((sKUInput.TotalRevenueMaxValue == 0) || ((decimal?)y.Revenue >= sKUInput.TotalRevenueMinValue
+                                  && (decimal)y.Revenue <= sKUInput.TotalRevenueMaxValue))
+                                  && ((sKUInput.SalesQuantityMaxValue == 0) || ((decimal?)y.Quantity >= sKUInput.SalesQuantityMinValue
                                   && (decimal)y.Quantity <= sKUInput.SalesQuantityMaxValue)))
                                   .Skip(skipRecordCount)
                                   .Take(dataRange == 0 ? list.Count() : dataRange)
@@ -366,11 +420,11 @@ namespace DigitalDashboard.BLL.Repository
                                   .ToList();
 
                 columnSKUList.SKUList = records;
-                columnSKUList.TotalCount = records.Count();                
+                columnSKUList.TotalCount = records.Count();
             }
             catch (Exception e)
             {
-               //logger.LogError(e.Message);
+                //logger.LogError(e.Message);
                 //return StatusCodes.Status500InternalServerError;
             }
             return columnSKUList;
@@ -378,7 +432,7 @@ namespace DigitalDashboard.BLL.Repository
         private async Task<List<BMSRegulatorySKU>> GetBMSRegulatorySKUAsync(BMSRegulatorySKUInput sKUInput)
         {
             List<BMSRegulatorySKU> bMSRegulatorySKUList = new List<BMSRegulatorySKU>();
-            
+
             try
             {
                 #region Input_Parameters
@@ -424,14 +478,14 @@ namespace DigitalDashboard.BLL.Repository
                 #region Fetching_Data
 
                 bMSRegulatorySKUList = await sKUCollection
-                                            .Find(x => x.Active.ToLower() == "true" 
-                                            && (string.IsNullOrEmpty(sKUInput.ID) || idList.Contains(x.id)) 
+                                            .Find(x => x.Active.ToLower() == "true"
+                                            && (string.IsNullOrEmpty(sKUInput.ID) || idList.Contains(x.id))
                                             && (string.IsNullOrEmpty(sKUInput.SKU) || SKUList.Contains(x.SKU))
-                                            && (string.IsNullOrEmpty(sKUInput.ProductDescription.Trim()) || ProductDescriptionList.Contains(x.ProductDescription)) 
-                                            && (string.IsNullOrEmpty(sKUInput.OfferingManager.Trim()) || OfferingManagerList.Contains(x.OfferingManager)) 
-                                            && (string.IsNullOrEmpty(sKUInput.SoldToCountry.Trim()) || SoldToCountryList.Contains(x.SoldToCountry)) 
-                                            && (string.IsNullOrEmpty(sKUInput.FiscalYear.Trim()) || FiscalYearList.Contains(x.FiscalYear)) 
-                                            && (string.IsNullOrEmpty(sKUInput.Region.Trim()) || regionList.Contains(x.Region)) 
+                                            && (string.IsNullOrEmpty(sKUInput.ProductDescription.Trim()) || ProductDescriptionList.Contains(x.ProductDescription))
+                                            && (string.IsNullOrEmpty(sKUInput.OfferingManager.Trim()) || OfferingManagerList.Contains(x.OfferingManager))
+                                            && (string.IsNullOrEmpty(sKUInput.SoldToCountry.Trim()) || SoldToCountryList.Contains(x.SoldToCountry))
+                                            && (string.IsNullOrEmpty(sKUInput.FiscalYear.Trim()) || FiscalYearList.Contains(x.FiscalYear))
+                                            && (string.IsNullOrEmpty(sKUInput.Region.Trim()) || regionList.Contains(x.Region))
                                             && (string.IsNullOrEmpty(sKUInput.strSearchText.Trim()) || x.SKU.ToLower().StartsWith(sKUInput.strSearchText.Trim().ToLower())))
                                             .ToListAsync();
 
@@ -443,5 +497,7 @@ namespace DigitalDashboard.BLL.Repository
             }
             return bMSRegulatorySKUList;
         }
+
+
     }
 }

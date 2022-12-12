@@ -1,5 +1,6 @@
 ﻿using DigitalDashboard.BLL;
 using DigitalDashboard.BLL.Interfaces;
+using DigitalDashboard.DAL.DTO;
 using DigitalDashboard.DAL.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
@@ -30,6 +31,18 @@ namespace DigitalDashboard.API.Controllers
 
             return result == null ? NoContent() : Ok(result);
         }
+
+        #region New Service Added On: 12 Dec 2022
+        [HttpGet, Route("digitaldashboard/RegulatorySKU/GetAllRegulatorySKUNew")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(RegulatorySKUFiltersDto))]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> GetFilteredRegulatorySKUNew()
+        {
+            var result = await sKURepository.GetFilteredRegulatorySKUNewAsync();
+
+            return result == null ? NoContent() : Ok(result);
+        }
+        #endregion
 
         // POST: This API is used to get regulatory SKU with FilterList
         //       based on certain criteria such as date range and skip record count.
@@ -74,6 +87,7 @@ namespace DigitalDashboard.API.Controllers
 
             return result.TotalCount == 0 ? NoContent() : Ok(result);
         }
+        
         // POST: This API is used to get SKU 'SearchList'
         //       based on certain criteria such as date range and skip record count
         [HttpPost, Route("digitaldashboard/RegulatorySKU/GetSKUSearchList/{dataRange:int}/{skipRecordCount:int}")]

@@ -1,4 +1,7 @@
-﻿namespace DigitalDashboard.DAL.Models
+﻿using DigitalDashboard.DAL.DTO;
+using System.Text.Json.Serialization;
+
+namespace DigitalDashboard.DAL.Models
 {
     public class BMSRegulatorySKUFilterData
     {

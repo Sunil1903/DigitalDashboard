@@ -1,4 +1,5 @@
-﻿using DigitalDashboard.DAL.Models;
+﻿using DigitalDashboard.DAL.DTO;
+using DigitalDashboard.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,9 @@ namespace DigitalDashboard.BLL.Interfaces
     public interface IRegulatorySKURepository
     {
         Task<BMSRegulatorySKUFilterData> GetFilteredRegulatorySKUAsync();
+
+        // New Service Added On: 12 Dec 2022
+        Task<RegulatorySKUFiltersDto> GetFilteredRegulatorySKUNewAsync();
 
         Task<RegulatorySKUDataWithFilterList> GetRegulatorySKUWithFilterListAsync(BMSRegulatorySKUInput sKUInput, 
                                                                                   int dataRange, 

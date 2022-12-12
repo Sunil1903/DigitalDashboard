@@ -14,7 +14,7 @@ namespace DigitalDashboard.BLL.Interfaces
         Task<BMSRegulatoryCountryWithTotalCount> GetRegulationsByCountryAsync(BMSRegulatoryCountryInput countryInput,
                                                                               int dataRange, 
                                                                               int skipRecordCount);
-        // New Version
+        // New Service Added On: 01 Dec 2022
         Task<RegulationByCountryDataWithFilters> GetRegulationsByCountryWithFiltersAsync(BMSRegulatoryCountryInput countryInput,
                                                                              int dataRange,
                                                                              int skipRecordCount);
